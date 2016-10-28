@@ -4,6 +4,7 @@
 
 - metadata
     - 基于jdbc获取数据库表的元数据信息
+
     ```
 
     public static void main(String[] arg) {
@@ -15,6 +16,7 @@
     ```
 - datasync
     - 基于jdbc实现两个数据源之间指定表的数据同步
+
     ```
      public static void main(String[] arg) throws Exception{
             DataSource source= DataSourceBuilder.create().driverClassName("com.mysql.jdbc.Driver").url("jdbc:mysql://localhost/b?autoReconnect=true&characterEncoding=utf-8").username("root").password("root").build();
@@ -24,6 +26,7 @@
             tableDataSync.syncTable("init_config");//以id为主键
             tableDataSync.syncTable("switch_config", Lists.newArrayList("cons_key","id2"));//复合主键
         }
+
     ```
 
 
