@@ -1,10 +1,12 @@
 package org.bumishi.toolbox.model;
 
+import java.io.Serializable;
+
 /**
  * Restful api response model
  * Created by xieqiang on 2016/11/26.
  */
-public class RestResponse {
+public class RestResponse implements Serializable{
 
     private boolean success;
 

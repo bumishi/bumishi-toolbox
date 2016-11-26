@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * 根据treeNode构建树结构
  * Created by xieqiang on 2016/11/26.
  */
 public class TreeModel {

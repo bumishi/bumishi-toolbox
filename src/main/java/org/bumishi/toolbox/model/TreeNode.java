@@ -1,5 +1,6 @@
 package org.bumishi.toolbox.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * 4    雪梨      0,1,3       3   1
  * 5    鸭梨      0,1,3       3   2
  */
-public class TreeNode {
+public class TreeNode implements Serializable{
 
     private String id;
 

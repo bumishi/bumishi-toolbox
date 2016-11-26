@@ -1,11 +1,13 @@
 package org.bumishi.toolbox.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
+ * 分页模型
  * Created by xieqiang on 2016/11/26.
  */
-public class PageModel<T> {
+public class PageModel<T> implements Serializable{
 
     private int page=1;
 
