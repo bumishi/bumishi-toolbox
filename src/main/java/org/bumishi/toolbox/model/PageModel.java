@@ -17,6 +17,19 @@ public class PageModel<T> implements Serializable{
 
     private boolean hasNext;//是否还有下一页
 
+    public PageModel(){
+
+    }
+
+    public PageModel(int page,int size){
+        this.page=page;
+        this.size=size;
+    }
+
+    public PageModel(int page){
+       this(page,20);
+    }
+
     public int getPage() {
         return page;
     }
