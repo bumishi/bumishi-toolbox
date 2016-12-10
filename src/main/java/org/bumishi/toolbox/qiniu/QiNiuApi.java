@@ -10,7 +10,10 @@ import com.qiniu.storage.model.FileInfo;
 import com.qiniu.storage.model.FileListing;
 import com.qiniu.util.Auth;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.util.Random;
 
 
 public class QiNiuApi {
@@ -21,32 +24,20 @@ public class QiNiuApi {
         auth = Auth.create(accessKey, secretKey);
     }
 
-    public Response upload(File file, String bucketName) {
+    public Response upload(byte[] file, String fileName, String bucketName) {
 
         //创建上传对象
         UploadManager uploadManager = new UploadManager(new Configuration(Zone.autoZone()));
 
-        //上传到七牛后保存的文件名
-        String key = file.getName();
         try {
             //调用put方法上传
-            Response res = uploadManager.put(file, key, auth.uploadToken(bucketName));
-            //打印返回的信息
-            System.out.println(res.bodyString());
+            Response res = uploadManager.put(file, fileName, auth.uploadToken(bucketName));
             return res;
         } catch (QiniuException e) {
             e.printStackTrace();
             Response r = e.response;
             if (r == null) {
                 return null;
-            }
-            // 请求失败时打印的异常的信息
-            System.out.println(r.toString());
-            try {
-                //响应的文本信息
-                System.out.println(r.bodyString());
-            } catch (QiniuException e1) {
-                //ignore
             }
             return r;
         }
@@ -65,22 +56,21 @@ public class QiNiuApi {
             BucketManager bucketManager = new BucketManager(auth, new Configuration(Zone.zone0()));
             FileListing fileListing = bucketManager.listFiles(bucket, null, null, 100, null);
             FileInfo[] items = fileListing.items;
-            for (FileInfo fileInfo : items) {
-                System.out.println(fileInfo.key);
-            }
+
             return items;
         } catch (QiniuException e) {
-            //捕获异常信息
-            Response r = e.response;
-            System.out.println(r.toString());
+            e.printStackTrace();
             return null;
         }
 
     }
 
-    public static void main(String[] a) {
+    public static void main(String[] a) throws IOException {
         QiNiuApi api = new QiNiuApi("access-key", "securt-key");
-        api.upload(new File("F:\\newserver.txt"), "bumishi-blog");
+        //上传到七牛后保存的文件名
+        String key = System.currentTimeMillis() + "" + new Random().nextInt(10000);
+        byte[] bytes = Files.readAllBytes(FileSystems.getDefault().getPath("f:", "newserver.txt"));
+        api.upload(bytes, key, "bumishi-blog");
         System.out.println(api.list("bumishi-blog"));
     }
 
