@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Restful api response model
  * Created by xieqiang on 2016/11/26.
  */
-public class RestResponse<T> implements Serializable {
+public class RestResponse<T> implements Serializable{
 
     private boolean success;
 
@@ -28,7 +28,7 @@ public class RestResponse<T> implements Serializable {
         return msg;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
