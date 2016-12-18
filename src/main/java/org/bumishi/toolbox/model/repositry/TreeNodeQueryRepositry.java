@@ -1,4 +1,6 @@
-package org.bumishi.toolbox.model;
+package org.bumishi.toolbox.model.repositry;
+
+import org.bumishi.toolbox.model.TreeNode;
 
 import java.util.List;
 

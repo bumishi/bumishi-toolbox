@@ -1,4 +1,6 @@
-package org.bumishi.toolbox.model;
+package org.bumishi.toolbox.model.repositry;
+
+import org.bumishi.toolbox.model.TreeNode;
 
 /**
  * 通用树节点写操作
