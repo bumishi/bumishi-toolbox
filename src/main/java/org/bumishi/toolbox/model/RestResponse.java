@@ -16,10 +16,6 @@ public class RestResponse<T> implements Serializable {
 
     private T data;
 
-    public boolean success() {
-        return success;
-    }
-
     public String getCode() {
         return code;
     }
@@ -32,6 +28,25 @@ public class RestResponse<T> implements Serializable {
         return data;
     }
 
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
 
     public static RestResponse ok(){
         RestResponse rep=new RestResponse();
