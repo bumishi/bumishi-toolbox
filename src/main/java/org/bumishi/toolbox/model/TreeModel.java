@@ -16,15 +16,21 @@ public class TreeModel {
         this.nodes=nodes;
     }
 
+    public List<? extends TreeNode> buildTree() {
+        return buildTree(false);
+    }
     /***
      * 以level==1的节点作为开始节点构建树结构
      * @return
      */
-    public  List<? extends TreeNode> buildTree(){
+    public List<? extends TreeNode> buildTree(boolean includeDisabled) {
         if (isEmpty(nodes)){
             return null;
         }
-        List<? extends TreeNode> firstLevels=nodes.stream().filter(node->!node.isDisabled() && node.getLevel()==1).collect(Collectors.toList());
+        List<? extends TreeNode> firstLevels = nodes.stream().filter(node -> node.getLevel() == 1).collect(Collectors.toList());
+        if (!includeDisabled) {
+            firstLevels = firstLevels.stream().filter(node -> !node.isDisabled()).collect(Collectors.toList());
+        }
         sortByOrder(firstLevels);
         firstLevels.stream().forEach(node-> setChildren(node,nodes));
         return firstLevels;
@@ -42,7 +48,7 @@ public class TreeModel {
 
     }
 
-    private  void sortByOrder(List<? extends TreeNode> firstLevels) {
+    public static void sortByOrder(List<? extends TreeNode> firstLevels) {
         firstLevels.sort((node1,node2)->Integer.valueOf(node1.getOrder()).compareTo(Integer.valueOf(node2.getOrder())));
     }
 
@@ -51,7 +57,7 @@ public class TreeModel {
      * 按数结构给节点排序
      * @param nodes
      */
-    public  void sortByTree(List<? extends TreeNode> nodes) {
+    public static void sortByTree(List<? extends TreeNode> nodes) {
         if(isEmpty(nodes)){
             return;
         }
