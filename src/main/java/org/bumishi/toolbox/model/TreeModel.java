@@ -37,7 +37,7 @@ public class TreeModel {
     }
 
 
-    private  void setChildren(TreeNode currentNode, List<? extends TreeNode> nodeList){
+    public static void setChildren(TreeNode currentNode, List<? extends TreeNode> nodeList) {
         List<? extends TreeNode> childrens=nodeList.stream().filter(node->(!node.isDisabled() && node.getPath().equals(currentNode.getPath()+","+currentNode.getId()))).collect(Collectors.toList());
         currentNode.setChildNodes(childrens);
         if (isEmpty(childrens)){
